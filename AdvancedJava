@@ -1,0 +1,55 @@
+Q.1 Create a servlet on extending HttpServlet class which prints a Welcome message on the WebPage.
+package org.demo1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Servlet4
+ */
+@WebServlet("/Servlet4")
+public class Servlet4 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Servlet4() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		//System.out.println("WELCOME TO MY WEB PAGE");
+		
+		PrintWriter pw=response.getWriter();
+		
+		pw.print(" WELCOME ");
+		
+		pw.close();
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+=========================================================================================================================================================
+Q.2 Create a Servlet which accepts two numbers as parameters in the form of query string and prints the sum,multiplication,Division,Subtraction
+Q.3 Create a Servlet which accepts firstname & lastname from query string and display the fullname in Capital case along with length.
