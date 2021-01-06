@@ -125,6 +125,48 @@ public class S2 extends HttpServlet {
 ============================================================================================================================================
 Q.3 Create a Servlet which accepts firstname & lastname from query string and display the fullname in Capital case along with length.
 
+Ans)
+
+package org.pac1;
+
+import java.io.IOException;
+import javax.servlet.GenericServlet;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+/**
+ * Servlet implementation class A3
+ */
+public class A3 extends GenericServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see GenericServlet#GenericServlet()
+     */
+    public A3() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see Servlet#service(ServletRequest request, ServletResponse response)
+	 */
+	public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
+	
+		
+		String firstname=request.getParameter("firstname");
+		String lastname=request.getParameter("lastname");
+		
+		response.getWriter().print(firstname.toUpperCase()+" "+lastname.toUpperCase());
+		
+		
+		response.getWriter().print(firstname.length()+" "+lastname.length());
+	}
+
+}
+==========================================================================================================================================================
+
 Q.4 Create 2 servlets and make a web.xml file in which a Integer value is defined as a parameter. First servlet is printing the square value of the parameter and second 
     servlet is printing the factorial of the parameter.
 Q.5 Create 2 servlets and one web.xml file in which name is set as a parameter for first servlet and city is set as a parameter for second servlet. First servlet prints
