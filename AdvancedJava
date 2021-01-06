@@ -52,6 +52,77 @@ public class Servlet4 extends HttpServlet {
 }
 =========================================================================================================================================================
 Q.2 Create a Servlet which accepts two numbers as parameters in the form of query string and prints the sum,multiplication,Division,Subtraction
+
+Ans)
+  package org.pac2;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class S2
+ */
+public class S2 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public S2() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+
+		  PrintWriter out=response.getWriter();
+		
+		//String name=request.getParameter("name");
+		
+		
+		  int num1=Integer.parseInt(request.getParameter("num1"));
+		  int num2=Integer.parseInt(request.getParameter("num2"));
+		  
+		  out.print("<br>Addition : ");
+		response.getWriter().print((num1+num2));
+		
+		out.print("<br>Multiplicaition : ");
+		response.getWriter().print((num1*num2));
+		
+		out.print("<br>Subtraction : ");
+		response.getWriter().print((num1-num2));
+		
+		out.print("<br>Division : ");
+		response.getWriter().print((num1/num2));
+		  
+	
+		
+		
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+
+============================================================================================================================================
 Q.3 Create a Servlet which accepts firstname & lastname from query string and display the fullname in Capital case along with length.
 
 Q.4 Create 2 servlets and make a web.xml file in which a Integer value is defined as a parameter. First servlet is printing the square value of the parameter and second 
