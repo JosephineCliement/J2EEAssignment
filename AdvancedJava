@@ -333,4 +333,133 @@ Q.7 Create a servlet which accepts id from the URL and delete the record for tha
 Q.8 Create a form which accepts ID and City and saves the data in the database.
 Q.9 create 2 servlets. In first servlet create an object of employee class which sets the attribute value for employee object .In second servlet retrieve the values
     of employee object and display all information about an employee.
+    Q.10 Create an Application which displays Marksheet of a Student.
+    a) Create a servlet1 which takes marks of 5 subjects from Html page as marksentry.html. Also takes name of student. Insert record in database.
+    b) Create a servlet2 which displays the result of all students on calulating percentage. Display Student name along with Percentage.
+    c) Display Records Percentage wise in Descending order.
+    d) Delete record of the student who got minimum percentage.
+    e) Update name of the student who got Maximum Percentage.
+Q.11 Create a Login Page where Username & password is entered. If username is "abcd" and password is "1234" then Display a message "Welcome abcd" on the second HTML 
+     Page display.html .If Username or password is incorrect then Display the message "Invalid Username/password" in third webpage Invalid.html. Write code to validate
+     username & password in a servlet
+     
+     Ans)
+     Login
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="LoginServlet" method="get">
+<table border="1">
+<tr><td>Username</td><td><input type="text" name="un"></td></tr>
+<tr><td>Password</td><td><input type="password" name="pw"></td></tr>
+<tr><td><input type="submit" value="Login"></td><td><input type="reset" value="Clear"></td></tr>
+</table>
+</form>
+</body>
+</html>
+
+==========================
+display
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<font color="green"><h1>Welcome to my Login Page</h1></font>
+</body>
+</html>
+========================
+invalid
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Invalid page</title>
+</head>
+<body>
+<font color="red">You made a mistake ,Try again!</font>
+</body>
+</html>
+====================
+LoginServlet
+
+
+package org.demo1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Servlet5
+ */
+public class LoginServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public LoginServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		PrintWriter out=response.getWriter();
+		response.setContentType("text/html");
+		String username=request.getParameter("un");
+		String password=request.getParameter("pw");
+		
+		if(username.equals("abcd")&&password.equals("1234"))
+		{
+			out.print("Welcome "+username);
+			RequestDispatcher rd=request.getRequestDispatcher("display.html");
+			rd.include(request, response);
+		}
+		else
+		{
+			out.print("Username / Password Invalid");
+			RequestDispatcher rd=request.getRequestDispatcher("invalid.html");
+			rd.include(request, response);
+		}
+	
+	}
+
+	
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+
+===============================================================================================================================================================
+Q.12 Create a web page Form.html which accepts the user details like Username and password. If the length of password is less than 8 characters then send the response on
+     the web page as error.html which displays message "Password should not be less than 8 characters" ,If password is valid the send the response to valid.html using 
+     sendRedirect() method.
+Q.13 Make a filter between the form.html in above question and a servlet. The filter will check the same validation above and sends the response to the valid.html if the
+     password is valid. If password is invalid then display the form.html on giving a message "Password Invalid".
 
