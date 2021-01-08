@@ -331,6 +331,111 @@ web.xml-----
 Q.7 Create a servlet which accepts id from the URL and delete the record for that id.
 
 Q.8 Create a form which accepts ID and City and saves the data in the database.
+
+Ans)
+Servlet====
+package org.demo1;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Scanner;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class A8
+ */
+public class A8 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public A8() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		Connection cn;
+		Statement smt;
+		
+		try {
+			 Class.forName("oracle.jdbc.driver.OracleDriver");  // Load & register driver
+			 
+		cn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","root"); // Establishes a connection
+		
+		smt=cn.createStatement();
+		
+		int id=Integer.parseInt(request.getParameter("id"));
+		
+		String city=request.getParameter("city");
+		String query="insert into dum1 values("+id+",'"+city+"')";
+		
+		smt.executeUpdate(query);
+		response.getWriter().print("Record inserted.....");
+		
+		smt.close();
+		cn.commit();
+		cn.close();
+		
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+		
+		
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+=================
+html===
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="A8" method="get">
+ID<input type="text" name="id"><br>
+City<input type="text" name="city"><br>
+<input type="submit" value="submit">
+</form>
+</body>
+</html>
+
+==================================================================================================================================================
+
+
+
 Q.9 create 2 servlets. In first servlet create an object of employee class which sets the attribute value for employee object .In second servlet retrieve the values
     of employee object and display all information about an employee.
     Q.10 Create an Application which displays Marksheet of a Student.
