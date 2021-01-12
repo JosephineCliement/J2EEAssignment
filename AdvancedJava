@@ -696,4 +696,177 @@ valid.html
      
 Q.13 Make a filter between the form.html in above question and a servlet. The filter will check the same validation above and sends the response to the valid.html if the
      password is valid. If password is invalid then display the form.html on giving a message "Password Invalid".
+     
+     
+ Ans)
+ 
+ Servlet----
+ 
+ 
+ package org.demo2;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class A13
+ */
+public class A13 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public A13() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		PrintWriter out=response.getWriter();
+		
+	out.print("Welcome");
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+===================================================
+ -------------------------------------
+ Filter---
+ 
+ package org.demo2;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+/**
+ * Servlet Filter implementation class A13Filter
+ */
+public class A13Filter implements Filter {
+
+    /**
+     * Default constructor. 
+     */
+    public A13Filter() {
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see Filter#destroy()
+	 */
+	public void destroy() {
+		// TODO Auto-generated method stub
+	}
+
+	/**
+	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
+	 */
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+
+		PrintWriter out=response.getWriter();
+		response.setContentType("text/html");
+		
+		String username=request.getParameter("un");
+		
+		String password=request.getParameter("pw");
+		
+	
+
+		response.getWriter().print(password.length());
+		
+		if(password.length()<8)
+			
+		
+		{
+			RequestDispatcher rd=request.getRequestDispatcher("valid.html");
+		rd.forward(request, response);
+		
+	
+		
+		}
+		
+		else
+		{
+			chain.doFilter(request, response);
+			
+			
+		}
+		
+	
+	}
+
+
+	private void sendRedirect(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	
+
+	/**
+	 * @see Filter#init(FilterConfig)
+	 */
+	public void init(FilterConfig fConfig) throws ServletException {
+		// TODO Auto-generated method stub
+	}
+
+}
+==========================
+ form.html
+ 
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="A13" method="get">
+Username<input type="text" name="un">
+Password<input type="password" name="pw">
+<input type="submit" value="submit">
+</form>
+</body>
+</html>
+=======================================
+invalid--
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Password Invalid</h1>
+</body>
+</html>
+======================================================================================================================================
+ 
 
